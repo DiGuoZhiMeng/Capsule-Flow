@@ -1,0 +1,14 @@
+############################### 启用Capsule Flow start ###########################
+capsule:
+  flow:
+    enable: true
+############################### 启用Capsule Flow end ############################
+
+############################### 数据源配置 start ################################
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+############################### 数据源配置 end ################################
