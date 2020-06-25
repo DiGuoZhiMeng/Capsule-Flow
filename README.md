@@ -21,9 +21,9 @@
 
 ## 项目结构
 ```text
-    └── Capsule-Flow
+    ├── Capsule-Flow
     ├── flow-spring-boot-starter                   核心模块
-    └──flow-spring-boot-starter-sample             示例模块，以Foo这个业务实体，展示单签、会签、并签场景的使用方法
+    └── flow-spring-boot-starter-sample            示例模块，以Foo、Parallel、Branch这3个业务实体，展示单签、会签及并签、多分支场景的使用方法
 ```
 
 ### 项目环境 
@@ -127,7 +127,7 @@ CREATE TABLE `flow_round` (
 DROP TABLE IF EXISTS `foo`;
 CREATE TABLE `foo` (
   `ID` int(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `FOO_NAME` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '流程名称',
+  `NAME` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '流程名称',
   `AROUND_ID` bigint(20) DEFAULT NULL COMMENT '回合id',
   `APPROVAL_STATUS` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '当前审批状态',
   `APPROVAL_STATUS_JSON` json DEFAULT NULL COMMENT '当前审批状态json字段',
