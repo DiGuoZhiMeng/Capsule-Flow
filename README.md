@@ -4,7 +4,7 @@
 > mybatis-plus-boot-starter.version 3.2.0
 
 ## 目标
-> 轻量化流程引擎，一个抽象基类，三张表构建起引擎核心，并可以在此基类上进行灵活定制和扩展。
+> 轻量化流程引擎，一个抽象父类，三张表构建起引擎核心，并可以在父类基础上进行灵活定制和扩展，依赖jar不足40KB。
 
 #### [GITHUB](https://github.com/DiGuoZhiMeng/Capsule-Flow) | [GITEE](https://gitee.com/DiGuoZhiMeng/Capsule-Flow)
 
