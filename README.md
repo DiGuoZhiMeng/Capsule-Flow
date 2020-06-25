@@ -229,13 +229,11 @@ INSERT INTO `flow_basic` VALUES ( 'FOO_SINGLE_FLOW', 'FOO', 'Rejected', null, 'S
 ```
 
 ### 4. 为测试实体Parallel创建一条会签、并签审批流，流转状态为：
-> 初始状态Pending Submit经Submit变为Submitted，角色为role1
+> 初始状态Pending Submit经Submit变为 A&&B，角色为role1
 
-> Submitted经Approve变为A，Reject变回到Pending Submit，审批角色为role2
+> A&&B状态表示必须A和B全部Approve变为C||D状态，A或B任一一个经Reject变回到Pending Submit，A审批角色为role2，B审批角色为role3
 
-> A经Approve变为B，Reject变回到Submitted，审批角色为role3
-
-> B经Approve变为Approved结束，Reject变回到Rejected，审批角色为role4
+> C||D状态经C和D任一节点经过Approve变为Approved，C或D任一节点经Reject变为Rejected，C审批角色为role4，D审批角色为role5
 
 > Rejected可重新Submit变为Submitted，角色为role1
 
@@ -256,15 +254,13 @@ INSERT INTO `flow_basic` (`FLOW_NAME`, `ENTITY_NAME`, `PREV_STATUS`, `PREV_STATU
 ```
 
 ### 5. 为测试实体Branch创建一条多分支场景审批流，流转状态为：
-> 初始状态Pending Submit经Submit变为Submitted，角色为role1
+> 初始状态Pending Submit经Submit后，根据实体的type属性判断转向哪个状态，如为A则转向A，如为B则转向B，如为C则转向C，角色为role1
 
-> Submitted经Approve变为A，Reject变回到Pending Submit，审批角色为role2
+> A经Approve变为Approved结束，Reject变回到Pending Submit，审批角色为role2
 
-> A经Approve变为B，Reject变回到Submitted，审批角色为role3
+> B经Approve变为Approved结束，Reject变回到Pending Submit，审批角色为role3
 
-> B经Approve变为Approved结束，Reject变回到Rejected，审批角色为role4
-
-> Rejected可重新Submit变为Submitted，角色为role1
+> C经Approve变为Approved结束，Reject变回到Pending Submit，审批角色为role4
 
 ```sql
 
@@ -313,17 +309,29 @@ spring:
         │               ├── rbac
         │               │   └── EnforcerFactory.java
         │               ├── controller
-        │               │   └── FooController.java
+        │               │   ├── BranchController.java
+        │               │   ├── FooController.java
+        │               │   └── ParallelController.java
         │               ├── entity
-        │               │   └── Foo.java
+        │               │   ├── Branch.java
+        │               │   ├── Foo.java
+        │               │   └── Parallel.java
         │               ├── handler
-        │               │   └── FooSingleHandler.java
+        │               │   ├── BranchHandler.java
+        │               │   ├── FooSingleHandler.java
+        │               │   └── ParallelHandler.java
         │               ├── mapper
-        │               │   └── FooMapper.java
+        │               │   ├── BranchMapper.java
+        │               │   ├── FooMapper.java
+        │               │   └── ParallelMapper.java
         │               └── service
+        │                   ├── BranchService.java
         │                   ├── FooService.java
+        │                   ├── ParallelService.java
         │                   └── impl
-        │                       └── FooServiceImpl.java
+        │                       ├── BranchServiceImpl.java
+        │                       ├── FooServiceImpl.java
+        │                       └── ParallelServiceImpl.java
         └── resources
             └── config
                 ├── rbac_model.conf
@@ -338,7 +346,7 @@ spring:
 flow-spring-boot-starter-sample/src/main/java/com/capsule/flow/sample/rabc/EnforcerFactory.java
 ```
 
-> 权限配置类
+> 角色权限配置
 
 ```text
 flow-spring-boot-starter-sample/src/main/resources/config/rabc/rbac_policy.csv
@@ -428,6 +436,15 @@ flow-spring-boot-starter-sample/src/main/java/com/capsule/flow/sample/controller
 #### 单签场景-获取审批流元数据信息，用于前端流程可视化展示，查询出所有正向流程梳理，即taskOrder>0，按先后排序后返回，，必须是有向无环图的场景，如果是通过规则引擎判断分支的场景需要通过业务实体的实际值判断出分支走向，把实际要走过的最终线路返回
 > [http://localhost:8080/foo/getFlowMetaInfoV2/20](http://localhost:8080/foo/getFlowMetaInfoV2/20)
 
+### 11. 会签、并签场景测试接口，[详见Controller类](https://gitee.com/DiGuoZhiMeng/Capsule-Flow/blob/master/flow-spring-boot-starter-sample/src/main/java/com/capsule/flow/sample/controller/ParallelController.java)
+```text
+flow-spring-boot-starter-sample/src/main/java/com/capsule/flow/sample/controller/ParallelController.java
+```
+
+### 12. 多分支场景测试接口，[详见Controller类](https://gitee.com/DiGuoZhiMeng/Capsule-Flow/blob/master/flow-spring-boot-starter-sample/src/main/java/com/capsule/flow/sample/controller/BranchController.java)
+```text
+flow-spring-boot-starter-sample/src/main/java/com/capsule/flow/sample/controller/BranchController.java
+```
 
 ## 联系
 QQ 1114031364| 微信号 doragonbarru| 
