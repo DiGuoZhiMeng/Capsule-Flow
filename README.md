@@ -21,9 +21,9 @@
 
 ## 项目结构
 ```text
-    ├── Capsule-Flow
-    ├── flow-spring-boot-starter                   核心模块
-    └── flow-spring-boot-starter-sample            示例模块，以Foo、Parallel、Branch这3个业务实体，展示单签、会签及并签、多分支场景的使用方法
+    └── Capsule-Flow
+        ├── flow-spring-boot-starter                   核心模块
+        └── flow-spring-boot-starter-sample            示例模块，以Foo、Parallel、Branch这3个业务实体，展示单签、会签及并签、多分支场景的使用方法
 ```
 
 ### 项目环境 
