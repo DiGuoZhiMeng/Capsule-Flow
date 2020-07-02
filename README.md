@@ -1,4 +1,4 @@
-### Capsule-Flow是一套集成Spring boot + Mybatis plus + Beetl的审批流（电子流）快速开发框架
+## Capsule-Flow是一套集成Spring boot + Mybatis plus + Beetl的审批流（电子流）快速开发框架
 > spring-boot.version 2.2.0.RELEASE
 
 > mybatis-plus-boot-starter.version 3.2.0
@@ -49,6 +49,14 @@ lombok | 1.18.12 | 注解生成Java Bean等工具 |
 ```bash
 git clone https://gitee.com/DiGuoZhiMeng/Capsule-Flow
 cd Capsule-Flow
+```
+### 添加Maven依赖：
+```xml
+<dependency>
+	<groupId>wiki.capsule</groupId>
+	<artifactId>flow-spring-boot-starter</artifactId>
+	<version>1.2.0.RELEASE</version>
+</dependency>
 ```
 
 ## 5分钟完成审批流创建
@@ -127,7 +135,7 @@ CREATE TABLE `flow_round` (
 DROP TABLE IF EXISTS `foo`;
 CREATE TABLE `foo` (
   `ID` int(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `NAME` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '流程名称',
+  `FOO_NAME` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '流程名称',
   `AROUND_ID` bigint(20) DEFAULT NULL COMMENT '回合id',
   `APPROVAL_STATUS` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '当前审批状态',
   `APPROVAL_STATUS_JSON` json DEFAULT NULL COMMENT '当前审批状态json字段',
