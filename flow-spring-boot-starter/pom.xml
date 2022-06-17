@@ -41,7 +41,7 @@
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <lombok.version>1.18.10</lombok.version>
-        <fastjson.version>1.2.70</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <ibeetl.version>3.1.7.RELEASE</ibeetl.version>
     </properties>
 
